@@ -5,7 +5,7 @@ Trabajo Práctico N°1 de la materia Teoría de Algoritmos del curso Buchwald-Ge
 ## Integrantes:
 - Victoria Avalos - 108434 
 - . -  
-- . - 
+- Facundo Monpelat - 92716 
 
 
 ## Instrucciones de uso

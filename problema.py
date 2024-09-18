@@ -1,5 +1,5 @@
 # Problema del juego de las monedas
-# Sofia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
+# sophia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
 # Cada moneda tiene un valor asociado. Sofia empieza a jugar y luego juegan alternativamente.
 # El juego termina cuando no quedan monedas en la fila.
 # Sofia quiere maximizar la suma de los valores de las monedas que elige.
@@ -10,20 +10,20 @@ from collections import deque
 
 
 def problema_monedas(fila):
-    sofia = []
+    sophia = []
     mateo = []
     esperados = []
 
     fila = deque(fila)
 
     while len(fila) > 0:
-        # Turno de Sofia
+        # Turno de Sophia
         if fila[0] > fila[-1]:
-            sofia.append(fila[0])
+            sophia.append(fila[0])
             fila.popleft()
             esperados.append("Primera moneda para Sophia")
         else:
-            sofia.append(fila[-1])
+            sophia.append(fila[-1])
             fila.pop()
             esperados.append("Última moneda para Sophia")
 
@@ -40,47 +40,60 @@ def problema_monedas(fila):
             fila.popleft()
             esperados.append("Primera moneda para Mateo")
 
-    return sofia, mateo, esperados
+    return sophia, mateo, esperados
 
 
 def tests():
+    output_folder = "outputs"
 
     # Tests de la cátedra
     catedra_folder = "tests_cases/catedra"
     test_files = ["20", "25", "50", "100", "1000", "10000", "20000"]
     for i in range(0, len(test_files)):
-        # Test i
         with open(f"{catedra_folder}/{test_files[i]}.txt", "r") as file:
             file.readline()
             fila = list(int(i) for i in file.readline().split(";"))
-            sofia, mateo, esperados = problema_monedas(fila)
-            print(
-                f"Test {i+1}: \n {'; '.join(esperados)}\n Ganancia Sofia: {sum(sofia)}"
-            )
+            sophia, mateo, esperados = problema_monedas(fila)
+            ganancia_sophia = sum(sophia)
+            ganancia_mateo = sum(mateo)
 
+            print(f"Test {test_files[i]}\nGanancia Sophia: {ganancia_sophia}")
+            print(f"Ganancia Mateo: {ganancia_mateo}")
+            if ganancia_sophia > ganancia_mateo:
+                print("Resultado: Sophia ganó.")
+            else:
+                print("Resultado: Sophia perdió.")
+
+            print("")
+
+            with open(f"{output_folder}/resultado_catedra_test_{i+1}.txt", "w") as output_file:
+                output_file.write(f"Esperados: {'; '.join(esperados)}\n")
     # Tests propios
     test_folder = "tests_cases"
     test_files_propios = [
-        "test1",
-        "test2",
-        "test3",
-        "test4",
-        "test5",
-        "test6",
-        "test7",
-        "test8",
-        "test9",
-        "test10",
+        "test1", "test2", "test3", "test4", "test5",
+        "test6", "test7", "test8", "test9", "test10"
     ]
+    print("")
     for i, test_file in enumerate(test_files_propios):
         with open(f"{test_folder}/{test_file}.txt", "r") as file:
             file.readline()
             fila = list(int(i) for i in file.readline().split(";"))
-            sofia, mateo, esperados = problema_monedas(fila)
-            print(
-                f"Test propio {i+1}: \n {'; '.join(esperados)}\n Ganancia Sofia: {sum(sofia)}"
-            )
+            sophia, mateo, esperados = problema_monedas(fila)
+            ganancia_sophia = sum(sophia)
+            ganancia_mateo = sum(mateo)
 
+            print(f"Test propio {i+1}\nGanancia Sophia: {ganancia_sophia}")
+            print(f"Ganancia Mateo: {ganancia_mateo}")
+            if ganancia_sophia > ganancia_mateo:
+                print("Resultado: Sophia ganó.")
+            else:
+                print("Resultado: Sophia perdió.")
+
+            print("")
+
+            with open(f"{output_folder}/resultado_test_propio{i+1}.txt", "w") as output_file:
+                output_file.write(f"Esperados: {'; '.join(esperados)}\n")
 
 if __name__ == "__main__":
     tests()

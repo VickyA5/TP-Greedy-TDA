@@ -11,3 +11,6 @@ Trabajo Práctico N°1 de la materia Teoría de Algoritmos del curso Buchwald-Ge
 ## Instrucciones de uso
 
 
+Desde la carpeta base del trabajo ejecutar el comando:
+
+`python3 problema.py`

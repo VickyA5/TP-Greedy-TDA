@@ -14,3 +14,5 @@ Trabajo Práctico N°1 de la materia Teoría de Algoritmos del curso Buchwald-Ge
 Desde la carpeta base del trabajo ejecutar el comando:
 
 `python3 problema.py`
+
+Los resultados de las acciones individuales de cada jugador se guardarán en la carpeta outputs.

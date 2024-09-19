@@ -7,6 +7,7 @@
 # Implementa la función problema_monedas(fila) que recibe una lista de enteros fila con los valores de las monedas en la fila.
 # La función debe devolver dos listas, la primera con los valores de las monedas que elige Sofia y la segunda con los valores de las monedas que elige Mateo.
 from collections import deque
+import os
 
 
 def problema_monedas(fila):
@@ -45,6 +46,8 @@ def problema_monedas(fila):
 
 def tests():
     output_folder = "outputs"
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     # Tests de la cátedra
     catedra_folder = "tests_cases/catedra"

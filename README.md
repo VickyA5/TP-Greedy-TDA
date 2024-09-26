@@ -26,4 +26,6 @@ El usuario puede agregar un archivo con su propio set de monedas en la carpeta d
 
 `python3 problema.py tests_cases/<nombre_archivo.txt>`
 
+El archivo debe contener los valores de las monedas uno al lado del otro separados únicamente por un punto y coma (`;`). Se desestima el caso de que haya una cantidad par de monedas de mismo valor. Soporta tener un comentario en la primera línea que comience únicamente con `#`. No debe contener espacios ni líneas extra. 
+
 Los resultados de las acciones individuales de cada jugador se guardarán en la carpeta `outputs`.

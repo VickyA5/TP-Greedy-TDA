@@ -50,26 +50,34 @@ def tests(file_path):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    with open(file_path, "r") as file:
-        file.readline()
-        fila = list(int(i) for i in file.readline().split(";"))
-        sophia, mateo, esperados = problema_monedas(fila)
-        ganancia_sophia = sum(sophia)
-        ganancia_mateo = sum(mateo)
+    try:
+        with open(file_path, "r") as file:
+            first_line = file.readline().strip()
+            if first_line.startswith("#"):
+                fila = list(int(i) for i in file.readline().strip().split(";") if i)
+            else:
+                fila = list(int(i) for i in first_line.split(";") if i)
+            
+            sophia, mateo, esperados = problema_monedas(fila)
+            ganancia_sophia = sum(sophia)
+            ganancia_mateo = sum(mateo)
 
-        print(f"Archivo {file_path}\nGanancia Sophia: {ganancia_sophia}")
-        print(f"Ganancia Mateo: {ganancia_mateo}")
-        if ganancia_sophia > ganancia_mateo:
-            print("Resultado: Sophia ganó.")
-        else:
-            print("Resultado: Sophia perdió.")
+            print(f"Archivo {file_path}\nGanancia Sophia: {ganancia_sophia}")
+            print(f"Ganancia Mateo: {ganancia_mateo}")
+            if ganancia_sophia > ganancia_mateo:
+                print("Resultado: Sophia ganó.")
+            else:
+                print("Resultado: Sophia perdió.")
 
-        print("")
+            print("")
 
-        output_filename = os.path.basename(file_path).replace(".txt", "_resultado.txt")
-        with open(f"{output_folder}/{output_filename}", "w") as output_file:
-            output_file.write(f"Esperados: {'; '.join(esperados)}\n")
+            output_filename = os.path.basename(file_path).replace(".txt", "_resultado.txt")
+            with open(f"{output_folder}/{output_filename}", "w") as output_file:
+                output_file.write(f"Esperados: {'; '.join(map(str, esperados))}\n")
+    except Exception as e:
+        print(f"Error al procesar el archivo {file_path}: {e}")
 
+        
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Argumentos incorrectos.\nUso: python3 problema.py <archivo_set_de_datos.txt>")

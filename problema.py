@@ -1,5 +1,5 @@
 # Problema del juego de las monedas
-# Sofia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
+# sophia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
 # Cada moneda tiene un valor asociado. Sofia empieza a jugar y luego juegan alternativamente.
 # El juego termina cuando no quedan monedas en la fila.
 # Sofia quiere maximizar la suma de los valores de las monedas que elige.
@@ -7,23 +7,25 @@
 # Implementa la función problema_monedas(fila) que recibe una lista de enteros fila con los valores de las monedas en la fila.
 # La función debe devolver dos listas, la primera con los valores de las monedas que elige Sofia y la segunda con los valores de las monedas que elige Mateo.
 from collections import deque
+import os
+import sys
 
 
 def problema_monedas(fila):
-    sofia = []
+    sophia = []
     mateo = []
     esperados = []
 
     fila = deque(fila)
 
     while len(fila) > 0:
-        # Turno de Sofia
+        # Turno de Sophia
         if fila[0] > fila[-1]:
-            sofia.append(fila[0])
+            sophia.append(fila[0])
             fila.popleft()
             esperados.append("Primera moneda para Sophia")
         else:
-            sofia.append(fila[-1])
+            sophia.append(fila[-1])
             fila.pop()
             esperados.append("Última moneda para Sophia")
 
@@ -40,47 +42,45 @@ def problema_monedas(fila):
             fila.popleft()
             esperados.append("Primera moneda para Mateo")
 
-    return sofia, mateo, esperados
+    return sophia, mateo, esperados
 
 
-def tests():
+def tests(file_path):
+    output_folder = "outputs"
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
-    # Tests de la cátedra
-    catedra_folder = "tests_cases/catedra"
-    test_files = ["20", "25", "50", "100", "1000", "10000", "20000"]
-    for i in range(0, len(test_files)):
-        # Test i
-        with open(f"{catedra_folder}/{test_files[i]}.txt", "r") as file:
-            file.readline()
-            fila = list(int(i) for i in file.readline().split(";"))
-            sofia, mateo, esperados = problema_monedas(fila)
-            print(
-                f"Test {i+1}: \n {'; '.join(esperados)}\n Ganancia Sofia: {sum(sofia)}"
-            )
+    try:
+        with open(file_path, "r") as file:
+            first_line = file.readline().strip()
+            if first_line.startswith("#"):
+                fila = list(int(i) for i in file.readline().strip().split(";") if i)
+            else:
+                fila = list(int(i) for i in first_line.split(";") if i)
+            
+            sophia, mateo, esperados = problema_monedas(fila)
+            ganancia_sophia = sum(sophia)
+            ganancia_mateo = sum(mateo)
 
-    # Tests propios
-    test_folder = "tests_cases"
-    test_files_propios = [
-        "test1",
-        "test2",
-        "test3",
-        "test4",
-        "test5",
-        "test6",
-        "test7",
-        "test8",
-        "test9",
-        "test10",
-    ]
-    for i, test_file in enumerate(test_files_propios):
-        with open(f"{test_folder}/{test_file}.txt", "r") as file:
-            file.readline()
-            fila = list(int(i) for i in file.readline().split(";"))
-            sofia, mateo, esperados = problema_monedas(fila)
-            print(
-                f"Test propio {i+1}: \n {'; '.join(esperados)}\n Ganancia Sofia: {sum(sofia)}"
-            )
+            print(f"Archivo {file_path}\nGanancia Sophia: {ganancia_sophia}")
+            print(f"Ganancia Mateo: {ganancia_mateo}")
+            if ganancia_sophia > ganancia_mateo:
+                print("Resultado: Sophia ganó.")
+            else:
+                print("Resultado: Sophia perdió.")
 
+            print("")
 
+            output_filename = os.path.basename(file_path).replace(".txt", "_resultado.txt")
+            with open(f"{output_folder}/{output_filename}", "w") as output_file:
+                output_file.write(f"Esperados: {'; '.join(map(str, esperados))}\n")
+    except Exception as e:
+        print(f"Error al procesar el archivo {file_path}: {e}")
+
+        
 if __name__ == "__main__":
-    tests()
+    if len(sys.argv) != 2:
+        print("Argumentos incorrectos.\nUso: python3 problema.py <archivo_set_de_datos.txt>")
+    else:
+        file_path = sys.argv[1]
+        tests(file_path)

@@ -1,0 +1,2 @@
+# En este caso gana Sophia con 312 puntos, Mateo con 98 puntos, Sophia: 930, 40;20, 90, 52, 80 , Mateo: 1 ,10;, 15, 50, 22
+10;20;50;22;80;52;90;15;40;1;30

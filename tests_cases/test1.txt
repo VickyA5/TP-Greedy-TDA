@@ -1,2 +1,0 @@
-# en este caso gana sofia con 90 puntos, mateo con 22 puntos, sofia: 50, 30, 10, mateo: 20, 2
-20;30;2;10;50

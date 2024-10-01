@@ -33,7 +33,7 @@ def problema_monedas(fila):
             break
 
         # Turno de Mateo
-        if fila[0] > fila[-1]:
+        if fila[0] >= fila[-1]:
             mateo.append(fila[-1])
             fila.pop()
             esperados.append("Última moneda para Mateo")

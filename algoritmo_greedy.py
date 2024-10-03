@@ -1,11 +1,16 @@
-# Problema del juego de las monedas
-# sophia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
-# Cada moneda tiene un valor asociado. Sofia empieza a jugar y luego juegan alternativamente.
-# El juego termina cuando no quedan monedas en la fila.
-# Sofia quiere maximizar la suma de los valores de las monedas que elige.
-# Mateo quiere minimizar la suma de los valores de las monedas que elige.
-# Implementa la función problema_monedas(fila) que recibe una lista de enteros fila con los valores de las monedas en la fila.
-# La función debe devolver dos listas, la primera con los valores de las monedas que elige Sofia y la segunda con los valores de las monedas que elige Mateo.
+'''
+-------------- Problema del juego de las monedas --------------
+ 
+Sophia y Mateo juegan a un juego en el que tienen que elegir una moneda de una fila de monedas.
+Cada moneda tiene un valor asociado. Sofia empieza a jugar y luego juegan alternativamente.
+El juego termina cuando no quedan monedas en la fila.
+Sofia quiere maximizar la suma de los valores de las monedas que elige.
+Mateo quiere minimizar la suma de los valores de las monedas que elige.
+Implementa la función problema_monedas(fila) que recibe una lista de enteros fila con los valores de las monedas en la fila.
+La función debe devolver dos listas, la primera con los valores de las monedas que elige Sofia y la segunda con los valores de las monedas que elige Mateo.
+
+'''
+
 from collections import deque
 import os
 import sys
@@ -62,25 +67,26 @@ def tests(file_path):
             ganancia_sophia = sum(sophia)
             ganancia_mateo = sum(mateo)
 
-            print(f"Archivo {file_path}\nGanancia Sophia: {ganancia_sophia}")
+            print(f"Corriendo algoritmo greedy con el contenido del archivo {file_path}\n\nGanancia Sophia: {ganancia_sophia}")
             print(f"Ganancia Mateo: {ganancia_mateo}")
             if ganancia_sophia > ganancia_mateo:
                 print("Resultado: Sophia ganó.")
             else:
                 print("Resultado: Sophia perdió.")
 
-            print("")
-
             output_filename = os.path.basename(file_path).replace(".txt", "_resultado.txt")
             with open(f"{output_folder}/{output_filename}", "w") as output_file:
                 output_file.write(f"Esperados: {'; '.join(map(str, esperados))}\n")
+            print(f"\nLos resultados de las acciones individuales de cada jugador se encuentran en outputs/{output_filename}.\n")
     except Exception as e:
         print(f"Error al procesar el archivo {file_path}: {e}")
 
         
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Argumentos incorrectos.\nUso: python3 problema.py <archivo_set_de_datos.txt>")
+        print("Argumentos incorrectos.\n" +
+              "Para ejecutar el algoritmo con un txt: python3 algoritmo_greedy.py <archivo_set_de_datos.txt>\n"
+              "Para ejecutar los tests: python3 run_tests.py")
     else:
         file_path = sys.argv[1]
         tests(file_path)

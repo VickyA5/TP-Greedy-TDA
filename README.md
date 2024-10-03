@@ -30,8 +30,8 @@ El archivo debe contener los valores de las monedas uno al lado del otro separad
 
 Los resultados de las acciones individuales de cada jugador se guardarán en la carpeta `outputs`.
 
-### Ejecución automatizada de los tests de por la cátedra
+### Ejecución automatizada de los tests de la cátedra
 
-Para ejecutar de forma automática todos los tests de la cátedra mediante el uso de la librería `unittest`:
+Para ejecutar de forma automática todos los tests de la cátedra mediante el uso de la librería `unittest`, correr desde la carpeta root:
 
 `python3 run_tests.py`

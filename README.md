@@ -35,3 +35,15 @@ Los resultados de las acciones individuales de cada jugador se guardarán en la 
 Para ejecutar de forma automática todos los tests de la cátedra mediante el uso de la librería `unittest`, correr desde la carpeta root:
 
 `python3 run_tests.py`
+
+### Automatización de casos de prueba
+
+Con el fin de automatizar la generación de casos de prueba de diferentes longitudes y valores, se implementaron dos programas: el primero, llamado ‘generador.py‘, se encarga
+de generar arreglos de números aleatorios y crear archivos con casos de prueba; el
+segundo, llamado ‘test auto.py‘, ejecuta cada uno de los casos de prueba y resuelve
+el problema greedy. Ambos programas se ejecutan de la siguiente manera:
+`python3 generador.py <tam_maximo_arreglo> <valor_maximo_elementos>`
+`python3 test_auto.py`
+El programa ‘generador.py‘ recibe dos argumentos: el primero corresponde al
+tamaño máximo del arreglo, y el segundo al valor máximo de los
+elementos en el arreglo.
